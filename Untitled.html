@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveMate | Find Fuel. Save Time. Stay Informed. Drive Smart.</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --navy: #0B3B6B;
+      --navy-dark: #072748;
+      --teal: #0E8F6E;
+      --teal-light: #10B981;
+      --amber: #F59E0B;
+      --red: #EF4444;
+      --bg: #F4F8FB;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --muted: #64748B;
+      --gradient: linear-gradient(135deg, #0B3B6B 0%, #0E8F6E 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #E2E8F0;
+      padding: 12px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-brand img {
+      height: 46px;
+      width: 46px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(11, 59, 107, 0.15);
+    }
+
+    .brand-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-text span:first-child { color: var(--navy); }
+    .brand-text span:last-child { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-gradient {
+      background: var(--gradient);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(14, 143, 110, 0.25);
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(11, 59, 107, 0.3);
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      background: #F8FAFC;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.8);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      background: var(--gradient);
+      color: #fff;
+      padding: 70px 5% 90px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .hero p.uvp {
+      font-size: 1.15rem;
+      opacity: 0.95;
+      max-width: 580px;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-logo-card {
+      background: #fff;
+      padding: 28px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .hero-logo-card img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 14px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #E2E8F0;
+      color: var(--navy);
+    }
+
+    .hero-stats div strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--teal);
+    }
+
+    .hero-stats div span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* SECTION COMMON */
+    section {
+      max-width: 1140px;
+      margin: 70px auto;
+      padding: 0 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 40px;
+    }
+
+    .section-header span {
+      color: var(--teal);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      color: var(--navy);
+      margin: 8px 0 12px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+    }
+
+    /* INTERACTIVE LIVE APP DEMO */
+    .app-demo-wrapper {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 28px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(11, 59, 107, 0.08);
+      border: 1px solid #E2E8F0;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 99px;
+      border: 1.5px solid #CBD5E1;
+      background: #fff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    .filter-btn[data-fuel="Petrol"].active { background: var(--teal); border-color: var(--teal); }
+    .filter-btn[data-fuel="CNG"].active { background: var(--navy); border-color: var(--navy); }
+    .filter-btn[data-fuel="Diesel"].active { background: var(--amber); border-color: var(--amber); color: #111; }
+    .filter-btn[data-fuel="EV"].active { background: #16A34A; border-color: #16A34A; }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid #CBD5E1;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--teal);
+    }
+
+    .station-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .station-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: #FAFCFF;
+    }
+
+    .station-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    }
+
+    .station-info h4 {
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .station-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .badge-open { background: #DCFCE7; color: #166534; }
+    .badge-low { background: #E0F2FE; color: #075985; }
+    .badge-mod { background: #FEF3C7; color: #92400E; }
+    .badge-high { background: #FEE2E2; color: #991B1B; }
+
+    .station-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mini-btn {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+
+    .mini-nav { background: var(--teal); color: #fff; }
+    .mini-report { background: #E2E8F0; color: var(--navy); }
+
+    /* COMPLIANCE TRACKER PANEL */
+    .compliance-panel {
+      background: linear-gradient(180deg, #0B3B6B 0%, #092E54 100%);
+      color: #fff;
+      padding: 24px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .compliance-panel h3 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .compliance-panel p {
+      font-size: 0.88rem;
+      opacity: 0.85;
+      margin-bottom: 16px;
+    }
+
+    .reminder-item {
+      background: rgba(255,255,255,0.1);
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid var(--teal-light);
+    }
+
+    .reminder-item.warn { border-left-color: var(--amber); }
+    .reminder-item.urgent { border-left-color: var(--red); }
+
+    .reminder-item small {
+      display: block;
+      opacity: 0.8;
+      font-size: 0.78rem;
+    }
+
+    .add-reminder-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .add-reminder-form input, .add-reminder-form select {
+      padding: 9px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    /* FEATURES GRID */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: #fff;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(11, 59, 107, 0.05);
+      border-top: 4px solid var(--teal);
+      transition: transform 0.25s;
+    }
+
+    .feature-card:nth-child(2) { border-top-color: var(--navy); }
+    .feature-card:nth-child(3) { border-top-color: var(--amber); }
+    .feature-card:nth-child(4) { border-top-color: #16A34A; }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #E6F4F1;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* HOW IT WORKS */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .step-card {
+      background: #fff;
+      padding: 26px;
+      border-radius: 16px;
+      position: relative;
+      border: 1px solid #E2E8F0;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gradient);
+      color: #fff;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    /* CTA & CONTACT SECTION */
+    .cta-banner {
+      background: var(--gradient);
+      color: #fff;
+      border-radius: 24px;
+      padding: 50px 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .contact-form {
+      background: #fff;
+      padding: 26px;
+      border-radius: 16px;
+      color: var(--text);
+    }
+
+    .contact-form h4 {
+      color: var(--navy);
+      margin-bottom: 14px;
+      font-size: 1.15rem;
+    }
+
+    .contact-form input, .contact-form select {
+      width: 100%;
+      padding: 11px 14px;
+      margin-bottom: 12px;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      font-size: 0.92rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-dark);
+      color: #CBD5E1;
+      padding: 40px 5% 24px;
+      margin-top: 80px;
+    }
+
+    .footer-grid {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      font-size: 0.85rem;
+      color: #94A3B8;
+    }
+
+    /* TOAST NOTIFICATION */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      font-weight: 600;
+      font-size: 0.92rem;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 999;
+      border-left: 5px solid var(--teal-light);
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 860px) {
+      .hero, .app-demo-wrapper, .cta-banner {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <img src="image.jpeg" alt="DriveMate Logo" onerror="this.style.display='none'">
+      <div class="brand-text"><span>Drive</span><span>Mate</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#live-demo">Live App Demo</a>
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#contact" class="btn btn-gradient" style="padding: 9px 18px;">Get Early Access</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero">
+    <div>
+      <div class="hero-badge">🚀 All-in-One Fuel & Vehicle Compliance App</div>
+      <h1>Find Fuel Faster. Skip Queues. Drive Smart.</h1>
+      <p class="uvp">
+        Stop wasting time in long Petrol, CNG, or EV queues and never miss an RC, PUC, Insurance, or Challan deadline again—all in one unified smart app.
+      </p>
+      <div class="hero-cta">
+        <a href="#live-demo" class="btn btn-white">⚡ Try Interactive Prototype</a>
+        <a href="#contact" class="btn btn-outline">Partner With Us</a>
+      </div>
+    </div>
+
+    <div class="hero-logo-card">
+      <img src="image.jpeg" alt="DriveMate Fuel & Vehicle Assistance Logo">
+      <div class="hero-stats">
+        <div><strong>4 Fuels</strong><span>Petrol • CNG • Diesel • EV</span></div>
+        <div><strong>Live</strong><span>Queue & Stock Alerts</span></div>
+        <div><strong>100%</strong><span>Compliance Peace</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- INTERACTIVE WORKING PROTOTYPE SECTION -->
+  <section id="live-demo">
+    <div class="section-header">
+      <span>Interactive Web Prototype</span>
+      <h2>Experience DriveMate Live</h2>
+      <p>Filter nearby stations by fuel type, test real-time queue updates, and manage your vehicle document reminders right here.</p>
+    </div>
+
+    <div class="app-demo-wrapper">
+      <!-- LEFT: STATION FINDER -->
+      <div>
+        <h3 style="color: var(--navy); margin-bottom: 12px;">📍 Nearby Fuel & EV Stations</h3>
+        <div class="filter-bar" id="fuelFilters">
+          <button class="filter-btn active" data-fuel="All">All Stations</button>
+          <button class="filter-btn" data-fuel="Petrol">⛽ Petrol</button>
+          <button class="filter-btn" data-fuel="CNG">🔥 CNG</button>
+          <button class="filter-btn" data-fuel="Diesel">🛢️ Diesel</button>
+          <button class="filter-btn" data-fuel="EV">🔌 EV Charger</button>
+        </div>
+
+        <input type="text" id="stationSearch" class="search-input" placeholder="Search area (e.g., Alandi, Pune, Hinjawadi, Moshi)..." />
+
+        <div class="station-list" id="stationList">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- RIGHT: COMPLIANCE REMINDERS -->
+      <div class="compliance-panel">
+        <div>
+          <h3>🔔 Vehicle Compliance Vault</h3>
+          <p>Vehicle: <strong>MH 12 AB 4590</strong> • Automated Deadline Alerts</p>
+          <div id="reminderList">
+            <div class="reminder-item urgent">
+              <div>
+                <strong>Insurance Renewal</strong>
+                <small>Expires in 3 Days • Avoid ₹2,000 fine</small>
+              </div>
+              <span class="badge badge-high">Due Soon</span>
+            </div>
+            <div class="reminder-item warn">
+              <div>
+                <strong>RC Renewal Alert</strong>
+                <small>Expires in 15 Days</small>
+              </div>
+              <span class="badge badge-mod">Upcoming</span>
+            </div>
+            <div class="reminder-item">
+              <div>
+                <strong>PUC Certificate</strong>
+                <small>Valid until Oct 2026</small>
+              </div>
+              <span class="badge badge-open">Active</span>
+            </div>
+            <div class="reminder-item urgent">
+              <div>
+                <strong>Traffic Challan Details</strong>
+                <small>1 Pending E-Challan (₹500)</small>
+              </div>
+              <button class="mini-btn mini-nav" onclick="showToast('Redirecting to official Parivahan payment portal...')">Pay Now</button>
+            </div>
+          </div>
+        </div>
+
+        <form class="add-reminder-form" id="reminderForm">
+          <select id="docType" required>
+            <option value="PUC Certificate">PUC</option>
+            <option value="Insurance Policy">Insurance</option>
+            <option value="RC Renewal">RC</option>
+            <option value="Vehicle Servicing">Servicing</option>
+          </select>
+          <input type="date" id="docDate" required />
+          <button type="submit" class="mini-btn" style="background: var(--teal-light); color: #fff;">+ Add</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FEATURES -->
+  <section id="features">
+    <div class="section-header">
+      <span>Why Choose DriveMate</span>
+      <h2>Everything Every Commuter Needs</h2>
+      <p>Designed for daily commuters, students, cab/delivery drivers, and station operators across Maharashtra.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⛽</div>
+        <h3>Multi-Fuel & EV Discovery</h3>
+        <p>Instantly locate nearby Petrol, Diesel, CNG, and EV charging stations with live stock and charger availability.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>Real-Time Crowd & Queue Status</h3>
+        <p>Check live waiting times (Low, Moderate, or High crowd) before leaving so you skip long queues and save fuel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Smart Document Reminders</h3>
+        <p>Never pay late penalties again with automated push alerts for RC, PUC, Insurance renewals, and servicing dates.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">₹</div>
+        <h3>Instant Challan Tracking</h3>
+        <p>Stay informed about pending traffic challans in one dashboard so every trip is stress-free and legally compliant.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-header">
+      <span>Simple 3-Step Workflow</span>
+      <h2>How DriveMate Saves Your Time</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3 style="color: var(--navy); margin-bottom: 8px;">Select Fuel or Charger</h3>
+        <p style="color: var(--muted);">Open DriveMate and tap Petrol, Diesel, CNG, or EV to view verified stations along your route.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3 style="color: var(--navy); margin-bottom: 8px;">Verify Stock & Queue</h3>
+        <p style="color: var(--muted);">Check live pump stock and crowd status updated by station partners and fellow commuters.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3 style="color: var(--navy); margin-bottom: 8px;">Navigate & Stay Compliant</h3>
+        <p style="color: var(--muted);">Route directly to the fastest pump while DriveMate tracks your RC, PUC, and insurance in the background.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA & CONTACT -->
+  <section id="contact">
+    <div class="cta-banner">
+      <div>
+        <h2 style="font-size: 2rem; margin-bottom: 12px;">Ready to Drive Smarter?</h2>
+        <p style="opacity: 0.92; margin-bottom: 20px;">
+          Join urban commuters and station operators in Pune, Mumbai, Nagpur, Nashik, and Chhatrapati Sambhajinagar. Get early access to the Android & iOS app or register your fuel/EV station!
+        </p>
+        <p style="font-size: 0.9rem; opacity: 0.9;">
+          📍 <strong>Headquarters:</strong> MITAOE, Alandi, Pune, Maharashtra<br>
+          📧 <strong>Email:</strong> support@drivemateapp.in &nbsp;|&nbsp; 💬 <strong>24/7 Support:</strong> WhatsApp & In-App AI Helpdesk
+        </p>
+      </div>
+
+      <form class="contact-form" id="leadForm">
+        <h4>Get Early App Access / Demo</h4>
+        <input type="text" id="userName" placeholder="Your Full Name" required />
+        <input type="email" id="userEmail" placeholder="Email or Phone Number" required />
+        <select id="userRole">
+          <option value="Vehicle Owner">I am a Vehicle Owner / Commuter</option>
+          <option value="Station Operator">I am a Fuel / EV Station Operator</option>
+          <option value="PUC / Garage Partner">I am a PUC Center / Garage Partner</option>
+        </select>
+        <button type="submit" class="btn btn-gradient" style="width: 100%;">Request Early Access</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="brand-text" style="font-size: 1.4rem; margin-bottom: 8px;">
+          <span style="color: #fff;">Drive</span><span style="color: var(--teal-light);">Mate</span>
+        </div>
+        <p style="font-size: 0.88rem; max-width: 340px;">
+          Find Fuel. Save Time. Stay Informed. Drive Smart. Built to eliminate fuel queues and missed vehicle compliance deadlines.
+        </p>
+      </div>
+      <div>
+        <h4 style="color: #fff; margin-bottom: 8px;">Launch Cities</h4>
+        <p style="font-size: 0.88rem;">Pune • Mumbai • Nagpur • Nashik • Chhatrapati Sambhajinagar</p>
+      </div>
+      <div>
+        <h4 style="color: #fff; margin-bottom: 8px;">Channels</h4>
+        <p style="font-size: 0.88rem;">Google Play • Apple App Store • Web Portal • PUC QR Partners</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 DriveMate – Fuel & Vehicle Assistance | MITAOE, Alandi, Pune. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- TOAST POPUP -->
+  <div id="toast">Action completed!</div>
+
+  <!-- INTERACTIVE JAVASCRIPT -->
+  <script>
+    // Sample Live Station Data
+    const stations = [
+      { name: "HPCL Smart Fuel & CNG Pump", area: "Alandi Road, Pune", dist: "0.8 km", fuels: ["Petrol", "CNG", "Diesel"], status: "In Stock", queue: "Low Queue (3 mins)", badgeClass: "badge-low" },
+      { name: "Ather Grid Fast EV Plaza", area: "Moshi, Pune", dist: "1.4 km", fuels: ["EV"], status: "4/6 Chargers Free", queue: "No Queue", badgeClass: "badge-low" },
+      { name: "Shell Mobility Station", area: "Viman Nagar, Pune", dist: "3.2 km", fuels: ["Petrol", "Diesel", "EV"], status: "In Stock", queue: "Moderate (8 mins)", badgeClass: "badge-mod" },
+      { name: "MNGL Green CNG Station", area: "Bhosari, Pune", dist: "2.5 km", fuels: ["CNG"], status: "High Pressure Available", queue: "Low Queue (5 mins)", badgeClass: "badge-low" },
+      { name: "Tata Power EZ Charge Hub", area: "Hinjawadi Phase 1, Pune", dist: "5.1 km", fuels: ["EV"], status: "2/4 Chargers Free", queue: "High Queue (15 mins)", badgeClass: "badge-high" }
+    ];
+
+    let activeFuel = "All";
+
+    function renderStations() {
+      const searchText = document.getElementById("stationSearch").value.toLowerCase();
+      const container = document.getElementById("stationList");
+      container.innerHTML = "";
+
+      const filtered = stations.filter(st => {
+        const matchesFuel = activeFuel === "All" || st.fuels.includes(activeFuel);
+        const matchesSearch = st.name.toLowerCase().includes(searchText) || st.area.toLowerCase().includes(searchText);
+        return matchesFuel && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p style="color: var(--muted); padding: 16px; text-align: center;">No stations match your filter. Try clearing the search box!</p>`;
+        return;
+      }
+
+      filtered.forEach((st, idx) => {
+        const card = document.createElement("div");
+        card.className = "station-card";
+        card.innerHTML = `
+          <div class="station-info">
+            <h4>${st.name}</h4>
+            <div class="station-meta">📍 ${st.area} • <strong>${st.dist}</strong> • Fuels: ${st.fuels.join(", ")}</div>
+            <div class="badges">
+              <span class="badge badge-open">✔ ${st.status}</span>
+              <span class="badge ${st.badgeClass}">⏱ ${st.queue}</span>
+            </div>
+          </div>
+          <div class="station-actions">
+            <button class="mini-btn mini-nav" onclick="showToast('🧭 Opening Google Maps navigation to ${st.name}...')">Navigate</button>
+            <button class="mini-btn mini-report" onclick="toggleCrowd(${idx})">Update Crowd</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Toggle Crowd Status Live
+    function toggleCrowd(index) {
+      const st = stations[index];
+      if (st.queue.includes("Low")) {
+        st.queue = "Moderate (8 mins)";
+        st.badgeClass = "badge-mod";
+      } else {
+        st.queue = "Low Queue (2 mins)";
+        st.badgeClass = "badge-low";
+      }
+      renderStations();
+      showToast(`✅ Live crowd status updated for ${st.name}!`);
+    }
+
+    // Fuel Filter Click Handler
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFuel = btn.getAttribute("data-fuel");
+        renderStations();
+      });
+    });
+
+    // Search Input Handler
+    document.getElementById("stationSearch").addEventListener("input", renderStations);
+
+    // Add Vehicle Reminder Handler
+    document.getElementById("reminderForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const doc = document.getElementById("docType").value;
+      const date = document.getElementById("docDate").value;
+      const list = document.getElementById("reminderList");
+
+      const item = document.createElement("div");
+      item.className = "reminder-item";
+      item.innerHTML = `
+        <div>
+          <strong>${doc}</strong>
+          <small>Reminder set for ${date}</small>
+        </div>
+        <span class="badge badge-open">Scheduled</span>
+      `;
+      list.prepend(item);
+      e.target.reset();
+      showToast(`🔔 Automated alert scheduled for ${doc}!`);
+    });
+
+    // Lead / Early Access Form Handler
+    document.getElementById("leadForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("userName").value;
+      const role = document.getElementById("userRole").value;
+      showToast(`🎉 Thanks ${name}! Your ${role} early-access invite has been sent.`);
+      e.target.reset();
+    });
+
+    // Toast Notification Helper
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3500);
+    }
+
+    // Initial Render
+    renderStations();
+  </script>
+</body>
+</html>
